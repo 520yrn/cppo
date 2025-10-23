@@ -48,7 +48,7 @@ cppo-main/
 └── logs/                    # Runtime logs (created automatically)
 ```
 
----
+
 
 ## ⚙️ Installation
 
@@ -72,7 +72,6 @@ pip install mujoco mujoco-python-viewer
 > **Tip:**
 > On macOS/Apple Silicon, prefer `mujoco` over `mujoco-py` for compatibility.
 
----
 
 ## 🚀 Quick Start
 
@@ -95,7 +94,7 @@ The default configuration (inside `main.py`) uses:
 
 Logs are automatically saved in `./logs/`.
 
----
+
 
 ## 🧠 Algorithm Highlights
 
@@ -133,7 +132,7 @@ $$
 
 If constraints are violated, gradients are adjusted toward feasible regions before reward improvement.
 
----
+
 
 ## 🧭 Supported Environments
 
@@ -145,7 +144,7 @@ If constraints are violated, gradients are adjusted toward feasible regions befo
 
 To change the environment, edit the `env_id` in `main.py`.
 
----
+
 
 ## 🧾 Logging & Outputs
 
@@ -153,7 +152,7 @@ To change the environment, edit the `env_id` in `main.py`.
 * Log files saved in `./logs/`
 * Replace `utils/log.py` with TensorBoard or Weights & Biases for advanced tracking.
 
----
+
 
 ## 🔬 Extending the Repo
 
@@ -163,7 +162,7 @@ You can extend this base for:
 * **Parallel Environments:** wrap rollout collection using `gym.vector`.
 * **Custom Constraints:** modify `algo/estep.py` to define new feasible regions.
 
----
+
 
 ## 🧪 Example Experiment Settings
 
