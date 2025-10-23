@@ -94,46 +94,6 @@ The default configuration (inside `main.py`) uses:
 
 Logs are automatically saved in `./logs/`.
 
-
-
-## 🧠 Algorithm Highlights
-
-### 1. Dual-branch Generalized Advantage Estimation (GAE)
-
-Computes both reward and cost advantages:
-$
-A_t = \sum_k (\gamma \lambda)^k \delta^r_{t+k}, \quad
-A^c_t = \sum_k (\gamma \lambda)^k \delta^c_{t+k}.
-$
-
-### 2. E-Step
-
-Solves the constrained optimization:
-$
-\max_v v \cdot A, \quad
-\text{s.t. } v \cdot A_c \le N d', \quad
-|v|_2 \le 2N\delta', \quad
-\mathbb{E}[v]=0, \quad
-v > -1.
-$
-
-### 3. M-Step
-
-Updates policy parameters by tracking the ratio:
-$
-\min_\theta
-\mathbb{E}\left[
-\big|v^\star - \tfrac{p_{\pi_\theta}}{p_\pi}\big|^2
-\right],
-\quad \text{s.t. } D_{KL}(\pi|\pi_\theta) \le \delta.
-$
-
-### 4. Recovery Update
-
-If constraints are violated, gradients are adjusted toward feasible regions before reward improvement.
-
-
-
 ## 🧭 Supported Environments
 
 | Environment           | Source           | Default Constraint |
