@@ -118,7 +118,7 @@ To change the environment, edit the `env_id` in `main.py`.
 
 You can extend this base for:
 
-* **Dyna-style CPPO:** add a learned dynamics model ($\hat{P}_\phi(s'|s,a)$) to generate model rollouts.
+* **Dyna-style CPPO:** add a learned dynamics model ( $\hat{P}_\phi(s'|s,a)$ ) to generate model rollouts.
 * **Parallel Environments:** wrap rollout collection using `gym.vector`.
 * **Custom Constraints:** modify `algo/estep.py` to define new feasible regions.
 
