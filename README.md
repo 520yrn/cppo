@@ -13,9 +13,9 @@ and provides a minimal, readable PyTorch implementation focused on the **E-step 
 It introduces a two-step iterative framework:
 
 1. **E-step:**
-   Solves for the feasible posterior ratio ( $v = \frac{q(a|s)}{p_\pi(a|s)} $) under reward, cost, and KL constraints.
+   Solves for the feasible posterior ratio \( v = \frac{q(a|s)}{p_\pi(a|s)} \) under reward, cost, and KL constraints.
 2. **M-step:**
-   Updates the policy parameters to track ($v$ ) with forward-KL regularization.
+   Updates the policy parameters to track \( v \) with forward-KL regularization.
 
 This repository provides:
 
@@ -27,7 +27,7 @@ This repository provides:
 
 ## 🧩 Repository Structure
 
-```
+```text
 cppo-main/
 ├── agents/                  # Policy and Value networks
 │   ├── policy.py            # Gaussian policy class (μ, logσ)
@@ -44,22 +44,27 @@ cppo-main/
 │   ├── schedule.py          # Linear learning-rate schedule
 │   └── seed.py              # Global seeding for reproducibility
 ├── main.py                  # Main training entry point
-├── environment.yml          # Conda environment file
+├── environment.yml          # Conda environment file (Windows-specific)
 └── logs/                    # Runtime logs (created automatically)
-```
-
-
+````
 
 ## ⚙️ Installation
 
-### Option 1: Conda (recommended)
+### Python version
+
+* The implementation has been run successfully with **Python 3.10**.
+* With **Python 3.11**, the environment may fail to resolve or download correctly, so Python 3.10 is recommended.
+
+### Option 1: Conda (recommended on Windows)
 
 ```bash
 conda env create -f environment.yml
 conda activate cppo
 ```
 
-### Option 2: pip + virtualenv
+* The provided `environment.yml` is **Windows-specific**.
+
+### Option 2: pip + virtualenv (cross-platform)
 
 ```bash
 python -m venv .venv
@@ -69,9 +74,7 @@ pip install torch gymnasium numpy safety-gymnasium
 pip install mujoco mujoco-python-viewer
 ```
 
-> **Tip:**
 > On macOS/Apple Silicon, prefer `mujoco` over `mujoco-py` for compatibility.
-
 
 ## 🚀 Quick Start
 
@@ -104,25 +107,25 @@ Logs are automatically saved in `./logs/`.
 
 To change the environment, edit the `env_id` in `main.py`.
 
-
-
 ## 🧾 Logging & Outputs
 
-* Console prints iteration stats (reward, cost, KL, entropy, etc.)
-* Log files saved in `./logs/`
-* Replace `utils/log.py` with TensorBoard or Weights & Biases for advanced tracking.
+* Console prints iteration stats (reward, cost, KL, entropy, etc.).
+* Log files are saved in `./logs/`.
+* You can replace `utils/log.py` with TensorBoard or Weights & Biases for more advanced tracking if needed.
 
+## 🔁 Reproducibility
 
+* `utils/seed.py` provides seeding utilities (for Python, NumPy, and PyTorch) to improve reproducibility.
+* The main script `main.py` sets a fixed `seed` by default (e.g., `seed = 0`).
+* To reproduce a run, use the same Python version (3.10), the same dependencies, and the same random seed.
 
 ## 🔬 Extending the Repo
 
 You can extend this base for:
 
-* **Dyna-style CPPO:** add a learned dynamics model ( $\hat{P}_\phi(s'|s,a)$ ) to generate model rollouts.
+* **Dyna-style CPPO:** add a learned dynamics model ( \hat{P}_\phi(s'|s,a) ) to generate model rollouts.
 * **Parallel Environments:** wrap rollout collection using `gym.vector`.
 * **Custom Constraints:** modify `algo/estep.py` to define new feasible regions.
-
-
 
 ## 🧪 Example Experiment Settings
 
@@ -135,4 +138,4 @@ You can extend this base for:
 | `--ratio-lb`     | PPO lower clip bound | 0.6     |
 | `--seed`         | random seed          | 0       |
 
-*(Currently, arguments are passed via `main.py`; add argparse for CLI usage.)*
+*(Currently, arguments are passed via `main.py`; you can add `argparse` for CLI usage if desired.)*
